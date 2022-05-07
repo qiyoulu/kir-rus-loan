@@ -1,0 +1,10 @@
+puts("File: ")
+text = File.read(gets.chomp)
+text.gsub!(/[0-9A-Za-z.,]/, "").gsub!("-", "")
+puts text
+carets = text.count("^")
+puts("Carets: #{carets}")
+asterisks = text.count("*")
+puts("Asterisks: #{asterisks}")
+dollars = text.count("$")
+puts("Dollars: #{dollars}")
