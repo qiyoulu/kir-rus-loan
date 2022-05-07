@@ -1,10 +1,12 @@
-puts("File: ")
-text = File.read(gets.chomp)
-text.gsub!(/[0-9A-Za-z.,]/, "").gsub!("-", "")
+puts "Read file: "
+file = gets.chomp
+text = File.read file
+text.gsub!("^./.<sent>$", "")
 puts text
-carets = text.count("^")
-puts("Carets: #{carets}")
-asterisks = text.count("*")
-puts("Asterisks: #{asterisks}")
-dollars = text.count("$")
-puts("Dollars: #{dollars}")
+asterisks = text.count "*"
+dollars = text.count "$"
+puts "Dollars: #{dollars}"
+puts "Asterisks: #{asterisks}"
+puts "Dollars - Asterisks: #{dollars - asterisks}"
+puts "Asterisks / Dollars: #{asterisks / dollars.to_f}"
+puts "(Dollars - Asterisks) / Dollars: #{(dollars - asterisks) / dollars.to_f}"
