@@ -4,14 +4,14 @@ Russian vocabulary in Kyrgyz
 Abstract
 As is true for other languages spoken in former Soviet republics, Kyrgyz includes a large proportion of lexical items borrowed from Russian as a result of linguistic russification. Russification refers to the voluntary and/or involuntary cultural assimilation of non-Russian people into Russian culture, most effectively facilitated through language. Today, out of the 6.5 million people living within Kyrgyzstan, 3.8 million are L1 Kyrgyz speakers. Despite only having 0.5 million L1 speakers, Russian has 2.1 million L2 speakers, more than any other language spoken in the country. (WorldAtlas, 2022). This study seeks to estimate the percentages of Russian loanwords in different registers of Kyrgyz language, using a variety of online media as the corpus. Higher proportions of Russian loanwords are expected in more casual media, and vice versa.
 
-Introduction
+Background
 The linguistic russification of Kyrgyz had begun long before the formation of a Kyrgyz nation-state since prior to the annexation of the region by the Russian Empire. Although lacking a unified language strategy aimed to russify its subjects, the administration of the Russian Empire adopted policies with the goal of establishing Russian as a high language over those natively spoken in its colonised territories. (Pavlenko, 2011) Kyrgyzstan under USSR control saw more conscious and consistent russification efforts, in spite of the official status of both languages. The Latin alphabet that had replaced the prior Arabic script for writing Kyrgyz in 1928 was subsequently replaced by a Cyrillic one in 1941 under Stalin’s administration, the system still in use today. The Kyrgyz Republic was formed in 1991 after the dissolution of the USSR. A derussification process followed that affected Kyrgyz culture, politics, as well as language.
 However, to this day, a significant proportion of Russian loanwords remains in Kyrgyz language, and Russian continues to enjoy its status as a de jure official language of Kyrgyzstan. Despite Kyrgyzstan being the only Turkic Central Asian nation that is yet to adopt a Latin script, a fact noted by then-president of Kazakhstan Tokayev (Akipress, 2019), Russian remains a lingua franca in Central Asia. The international prestige of Russian helps maintain a steady stream of resources from elsewhere in the Russosphere that attracts Kyrgyzstan residents to learn Russian. According to a 2021 study, Russian language is associated with the urban, while Kyrgyz the rural. Although single-language Kyrgyz schools outnumber their Russian and multilingual counterparts in all regions, most Kyrgyz people understand both languages to some degree. Regardless of ethnic background, the majority of those living in an urban area are multilingual in at least Kyrgyz and Russian. Better access to education, employment, information and economic advancement as motivating factors for Russian knowledge create a positive feedback loop that ultimately reinforces the predominance of Russian in Kyrgyz cities. (Orusbaev, 2008).
 Estimating the proportion of Russian loanwords in Kyrgyz language in different sociolinguistic registers can provide an insight into the degree of linguistic russification that has undergone in Kyrgyzstan. Given that there has yet to be a comprehensive contemporary study comparing the lexicons of Russian with Kyrgyz or any other Turkic Central Asian language, this project can serve as a trial on using computer-assisted methods that can be further expanded to incorporate larger corpora in more languages.
 
 Method
 The first portion of the corpus was collected online from three news sites: Super (https://www.super.kg/), 24 (https://www.24.kg/) and Azattyk / Radio Liberty Kyrgyzstan (https://www.azattyk.org/), in order of increasing visual formality. For each source, the first few news articles on the front page were taken for a total of approximately 900 words per source. Due to length differences, Super.kg had three articles, 24.kg had eight and Azattyk had two. The texts covered subjects including current events, life advice, politics and economy taking place in Kyrgyzstan, Central Asia, as well as globally. The second portion was collected from the Wikipedia page on Kyrgyzstan (https://ky.wikipedia.org/wiki/Кыргызстан/), which contained about 6000 words.
-Since Russian and Kyrgyz have different morphological derivations, the stem of a given Russian loanword in Kyrgyz needs to be isolated in order to be matched with its Russian source. Components from the Apertium project (Unhammer, 2022) were used to automate this process. Apertium is a free and open-source rule-based machine translation platform, whose engine consists of an eight-module assembly line: SL text → deformatter → morphological analyser → part-of-speech tagger → structural & lexical transformers → morphological generator → post-generator → re-formatter → TL text. (Forcada, 2010).
+Since Russian and Kyrgyz have different morphological derivations, the stem of a given Russian loanword in Kyrgyz needs to be isolated in order to be matched with its Russian source. Kyrgyz (Washington, 2021) and Russian (Tyers, 2021) components from the Apertium project (Unhammer, 2022) were used to automate this process. Apertium is a free and open-source rule-based machine translation platform, whose engine consists of an eight-module assembly line: SL text → deformatter → morphological analyser → part-of-speech tagger → structural & lexical transformers → morphological generator → post-generator → re-formatter → TL text. (Forcada, 2010).
 Only the deformatter and morphological analyser parts of the machine translation engine were used in this study. Cyrillic words were first extracted from a raw text using a Ruby program that removed non-Cyrillic letters, numerals, symbols and extra whitespaces. Cyrillic letters were all made lowercase. For example, after passing through extractor.rb, the raw text from Super.kg —
 Ош - Бишкек унаа жолунун 456 - чакырымында сел жүрүп, ылай аралаш таштар жолду бөгөп калды. Бул тууралуу Жол кыймылынын коопсуздугун камсыздоо башкы башкармалыгынан кабарлашты. […]
 
@@ -34,7 +34,8 @@ The reverse process was performed to a text in Russian, the front page of TASS (
 The programs and libraries used, as well as the data for each text at every step, are included in the project repository (https://github.com/qiyoulu/kir-rus-loan/).
 
 Results
-Kyrgyz text → extractor→ kir-morph → counter
+The preliminary results are:
+Kyrgyz text → extractor → kir-morph → counter
 Source
 Items
 Hits
@@ -56,7 +57,8 @@ Wikipedia
 5006 (81%)
 1142 (19%)
 
-Kyrgyz text → extractor→ kir-morph → isolator → rus-morph → counter
+
+Kyrgyz text → extractor → kir-morph → isolator → rus-morph → counter
 Source
 Items
 Hits
@@ -78,7 +80,8 @@ Wikipedia
 241 (21%)
 887 (79%)
 
-Russian text → extractor→ rus-morph → isolator → kir-morph → counter
+
+Russian text → extractor → rus-morph → isolator → kir-morph → counter
 Source
 Items
 Hits
@@ -88,13 +91,149 @@ TASS
 83 (19%)
 363 (81%)
 
-Discussion
+
 The three news sources in Kyrgyz have similar proportions of items not identified by Kyrgyz Apertium, ranging from 11% (Super.kg) to 14% (Azattyk). The proportion is higher for the Wikipedia page, at 19%. The mismatched items include numerals, symbols and Latin letters, which were yet to be filtered using isolator.rb.
 All four Kyrgyz sources have 21±1% word stems identified by Russian Apertium. The more informal 24.kg have an insignificantly lower percentage (19%) of Russian vocabulary compared to the more formal Azattyk (21%), disproving the hypothesis. The Russian source similarly has 19% word stems identified by Kyrgyz Apertium. The results suggest that the two written languages have an approximately 20% shared vocabulary.
-The methodology would be more accurate for the more recent Russian loanwords in Kyrgyz, since older loanwords that have undergone morphological shifts in one of or both languages would not be accurately identified. At the same time, coincidental false positives, i.e. false friends, would also be present in the result, since the semantics of each item was not taken into consideration. These two confounding variables might make the estimated proportions imprecise, but the margin of error should be similar for all five analysed sources.
 Since the estimate only applies to written Kyrgyz and Russian, the percentage of Russian loanwords in spoken Kyrgyz would be different. For a bilingual Kyrgyz-Russian speaker who frequently code-switches between the two languages, the proportion would be higher, and vice versa.
-Conclusion
-Since the methodology proved to be adequately fast and easy to perform, a larger corpus can be used in the future to produce more precise results. In addition, it can be applied to other languages using the Cyrillic script, as well as languages that do not share a writing system with the help of a script conversion program. The study can also be expanded to analyse spoken languages using speech recognition software to pre-process the data.
+The methodology would be more accurate for the more recent Russian loanwords in Kyrgyz, since older loanwords that have undergone morphological shifts in one of or both languages would not be accurately identified. At the same time, several types of false positives would also be present in the result, since the semantics of each item was not taken into consideration. These two confounding variables might make the estimated proportions imprecise, but the margin of error should be similar for all five analysed sources.
+Considering the semantics of the false positives, however, with the intuition of a bilingual Kyrgyz-Russian speaker, they can be divided into four types:
+Type
+Description
+Clarification strategy
+1
+Words that are spelled the same but have different meanings, i.e. “false friends”
+Remove from Russian count
+2
+Turkic loanwords into Russian
+Remove from Russian count
+3
+Russian loanwords into Kyrgyz with “false friends” in Kyrgyz
+Remove from corpora
+4
+Other miscellaneous false positives
+Leave in final result
+
+
+In particular, the identified false positives are:
+
+Type 1:
+катар
+эс (technically type 3)
+кал
+кур
+бола (not sure why it was identified in the Russian lexicon)
+орун
+алый
+тол (technically type 3)
+ар
+сын
+де
+ант
+калган (the lemma is кал in the Kyrgyz word)
+бой
+кайра
+чары
+катыш
+топ (technically type 3)
+кет
+ой
+да
+кол
+ага
+же
+сан
+так
+ар
+кар (technically type 3)
+ага
+ай (technically type 3)
+кат
+жар
+жакт (lemma should probably be жак)
+как (probably)
+аз
+коло
+ук (not sure why it was identified in the Russian lexicon)
+туш (technically type 3?)
+бай
+тара (technically type 3)
+мол (technically type 3)
+кашка (technically type 3)
+там
+чет
+тик
+
+Type 2:
+башка (this is actually a borrowing from Turkic into Russian)
+аскер (this is probably an Ottoman word in Russian)
+баш (not sure what this is in Russian, maybe a Turkic borrowing)
+кар (not sure what this is in Russian)
+алтын (a borrowing from Turkic in Russian)
+тамга (a borrowing from Turkic in Russian)
+сом
+улан
+аймак
+аш
+адат (not totally sure about this one)
+бош (not sure about this one either)
+базар
+сырт (not sure why it was identified in the Russian lexicon)
+хан
+такыр
+тан
+
+Type 3:
+бал (it has one meaning that's the same ("ball", as in a dance), and one that's different ("honey", only in Kyrgyz))
+тур (one meaning is the same ("tour"), the other isn't ("stand" in Kyrgyz))
+бас ("bass", but also "push/press/walk" in Kyrgyz)
+эр (one meaning is the same: the letter "r", but it means just "man" in Kyrgyz)
+э (name of the letter, and also the copula lemma in Kyrgyz)
+карат (causative of кара 'look', also "carat")
+бар ('go' and 'bar')
+бак ('take care of' and '(gas)tank')
+май ('oil/fat' and also "May")
+барак ('sheet of paper' and also "barracks")
+арка ('back' and also "arch")
+карт ('old', but also "cart"—maybe could go in type 1?)
+туз ('salt', but also "ace"—maybe could go in type 1?)
+чек
+сарай
+карма ('hold', but also "karma")
+
+Type 4:
+майдан (Russian word of Turkic origin, used in Kyrgyz as Russian borrowing(?), although is probably lemma май in most cases, in which it is a Russian word)
+дан (probably an ablative suffix that didn't get tokenised with whatever it was attached to)
+мак (this isn't used in Kyrgyz all that often, but is also a reasonably suffix in Kyrgyz)
+тапа
+кич
+га (probably an ablative suffix that didn't get tokenised with whatever it was attached to)
+кто (Russian pronoun, not sure why it was identified in the Kyrgyz lexicon)
+аск
+
+After the respective clarification strategies for each type of false positives, the final results are:
+Kyrgyz text → extractor→ kir-morph → isolator → rus-morph → counter
+Source
+Items
+Hits
+Super.kg
+366
+35 (9.5%)
+24.kg
+360
+38 (9.5%)
+Azattyk
+327
+31 (9.5%)
+Wikipedia
+1115
+190 (17%)
+
+
+In the final results, the reason is unclear for the significantly higher proportion of Russian loanwords being identified in the Kyrgyz Wikipedia source, which had the same proportion as the other sources in the preliminary results. A larger corpora from a more diverse range of sources is necessary in future work to determine whether the difference is normal between different types of media.
+
+Future work
+Kyrgyz Apertium supports an additional analysis mode, kir-tagger, which takes the semantics of each item into account and outputs the most likely disambiguated word stem. Therefore, kir-tagger should be used in future work instead of kir-morph when dealing with larger corpora to produce more precise results.
+In addition, it can be applied to other languages using the Cyrillic script, as well as languages that do not share a writing system with the help of a script conversion program. The study can also be expanded to analyse spoken languages using speech recognition software to pre-process the data.
 A meta-analysis of the proportions of Russian vocabulary in other ex-Soviet Central Asian languages can be performed to provide an estimate of the degree of Russian linguistic influence on the languages and region. Data collected from speakers of different ethnic and socioeconomic backgrounds can be compared to draw inferences between Russian vocabulary usage and identity in Central Asia.
 In addition, the methodology can be used to estimate the degree of other coloniser languages on the lexicon of their genetically-distant colonised counterparts, such as English and Hindi-Urdu, Spanish and Quechua, French and Arabic, to name a few pairs.
 
@@ -107,4 +246,6 @@ Forcada, M. et al. (2010). Documentation of the Open-Source Shallow-Transfer Mac
 Orusbaev, A., Mustajoki, A. & Protassova, E. (2008). Multilingualism, Russian Language and Education in Kyrgyzstan. International Journal of Bilingual Education and Bilingualism, 11:3-4, 476-500.
 Pavlenko, A. (2011). Linguistic russification in the Russian Empire: peasants into Russians? Russian Linguistics, 35: 3, 331-350. https://www.jstor.org/stable/41486701/.
 Unhammer, K. et al. (2022). Apertium: Free/open-source platform for developing rule-based machine translation systems and language technology. https://www.github.com/apertium/.
+Tyers, F. et al. (2021). Apertium-Rus: Apertium linguistics data for Russian. https://www.github.com/apertium-rus/.
+Washington, J. et al. (2021). Apertium-Kir: Apertium linguistics data for Kyrgyz. https://www.gitub.com/apertium-kir/.
 WorldAtlas (2022). Maps of Kyrgyzstan. https://www.worldatlas.com/maps/kyrgyzstan/.
